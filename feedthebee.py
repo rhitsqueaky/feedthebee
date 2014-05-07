@@ -45,7 +45,7 @@ class SyncError(Exception):
 
 
 def sync_feed(user, goal, auth_token, feed):
-    my_posts = feedparser.parse("http://www.drmaciver.com/feed/")
+    my_posts = feedparser.parse(feed)
 
     items = []
     for item in my_posts['items']:
