@@ -77,7 +77,7 @@ def sync_feed(user, goal, auth_token, feed):
     })
 
     result = json.loads(response.text)
-    if result.get('errors'):
+    if isinstance(result, dict) and result.get('errors'):
         raise SyncError([json.loads(e)["comment"] for e in result["errors"]])
 
 
