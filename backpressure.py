@@ -49,6 +49,8 @@ def all_goals(auth_token):
 
 def impending_goals(auth_token, max_days):
     for goal in all_goals(auth_token):
+        if goal["goal_type"] != "hustler":
+            continue
         losedate = datetime.utcfromtimestamp(goal["losedate"])
         now = datetime.utcnow()
         days_remaining = int(math.ceil(
@@ -90,9 +92,9 @@ def apply_backpressure(auth_token, max_days, target_goal):
             'auth_token': auth_token
         })
 
-    result = json.loads(response.text)
-    if isinstance(result, dict) and result.get('errors'):
-        raise ValueError([json.loads(e)["comment"] for e in result["errors"]])
+        result = json.loads(response.text)
+        if isinstance(result, dict) and result.get('errors'):
+            raise ValueError([json.loads(e)["comment"] for e in result["errors"]])
 
 
 def main():
