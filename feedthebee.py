@@ -44,7 +44,7 @@ class SyncError(Exception):
         )
 
 
-def sync_feed(user, goal, auth_token, feed):
+def sync_feed(goal, auth_token, feed):
     my_posts = feedparser.parse(feed)
 
     items = []
@@ -65,10 +65,10 @@ def sync_feed(user, goal, auth_token, feed):
     datapoints = json.dumps(items)
 
     api_url = (
-        "https://www.beeminder.com/api/v1/users/%s/goals/%s/"
+        "https://www.beeminder.com/api/v1/users/me/goals/%s/"
         "datapoints/create_all.json"
     ) % (
-        user, goal
+        goal,
     )
 
     response = requests.post(api_url, data={
@@ -89,8 +89,6 @@ def main():
                         help='The API key to use for beeminder')
     parser.add_argument('--feed', type=str, required=True,
                         help='The feed URL to fetch')
-    parser.add_argument('--user', type=str, required=True,
-                        help='The beeminder user to post to')
     parser.add_argument('--goal', type=str, required=True,
                         help='The beeminder goal to post to')
     args = parser.parse_args()
