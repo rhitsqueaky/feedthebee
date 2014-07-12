@@ -94,7 +94,8 @@ def apply_backpressure(auth_token, max_days, target_goal):
 
         result = json.loads(response.text)
         if isinstance(result, dict) and result.get('errors'):
-            raise ValueError([json.loads(e)["comment"] for e in result["errors"]])
+            raise ValueError(
+                [json.loads(e)["comment"] for e in result["errors"]])
 
 
 def main():

@@ -31,7 +31,7 @@ import requests
 import json
 
 
-def update_truncated_goals(auth_token, threshold, target_goal, source_goal):
+def update_truncated_goal(auth_token, threshold, target_goal, source_goal):
     result = json.loads(requests.get(
         "https://www.beeminder.com/api/v1/users/me/goals/%s/datapoints.json" %
         (source_goal,), params={
@@ -82,7 +82,7 @@ def main():
                         help='The beeminder goal to get datapoints from')
     args = parser.parse_args()
 
-    update_truncated_goals(**vars(args))
+    update_truncated_goal(**vars(args))
 
 if __name__ == '__main__':
     main()
