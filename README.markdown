@@ -1,4 +1,3 @@
-# Feed the bee
+# Beeminder tools
 
-A very simple script for dumping word counts from any RSS feed into a 
-[beeminder](https://www.beeminder.com/) goal.
+A collection of tools I use to automate [beeminder](https://www.beeminder.com/) goal. A mix of feeding data in from some sources and automating meta beeminder goals.
