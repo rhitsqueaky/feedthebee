@@ -99,7 +99,10 @@ def apply_backpressure(auth_token, max_days, target_goal):
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Put word counts for a feed into beeminder'
+        description=(
+            'Beemind the number of goals which have less than a week of safety'
+            ' buffer'
+        )
     )
     parser.add_argument('--auth-token', type=str, required=True,
                         help='The API key to use for beeminder')

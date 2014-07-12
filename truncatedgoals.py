@@ -67,7 +67,10 @@ def update_truncated_goals(auth_token, threshold, target_goal, source_goal):
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Put word counts for a feed into beeminder'
+        description=(
+            'Update (target-goal) with a value of 1 for every datapoint in '
+            '(source-goal) with a value of less than (threshold)'
+        )
     )
     parser.add_argument('--auth-token', type=str, required=True,
                         help='The API key to use for beeminder')
