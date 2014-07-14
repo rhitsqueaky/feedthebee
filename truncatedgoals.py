@@ -31,12 +31,19 @@ import requests
 import json
 
 
-def update_truncated_goal(auth_token, threshold, target_goal, source_goal):
+def get_datapoints(auth_token, goal):
     result = json.loads(requests.get(
         "https://www.beeminder.com/api/v1/users/me/goals/%s/datapoints.json" %
-        (source_goal,), params={
+        (goal,), params={
         "auth_token": auth_token
         }).text)
+    if isinstance(result, dict) and result.get("errors"):
+        raise ValueError(result["errors"])
+    return result
+
+
+def update_truncated_goal(auth_token, threshold, target_goal, source_goal):
+    result = get_datapoints(auth_token=auth_token, goal=source_goal)
 
     target_datapoints = [
         {
