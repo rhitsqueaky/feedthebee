@@ -61,13 +61,6 @@ def main():
             target_goal="backpressure",
             max_days=7
         )
-    if not args.skip_bedtime:
-        truncatedgoals.update_truncated_goal(
-            auth_token=auth_token,
-            source_goal="bedtime",
-            target_goal="earlynights",
-            threshold=10.5,
-        )
 
 if __name__ == '__main__':
     main()
