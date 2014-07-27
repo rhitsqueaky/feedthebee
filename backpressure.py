@@ -34,6 +34,7 @@ import json
 from datetime import datetime
 import math
 import time
+from beeminder import submit_datapoints
 
 
 def all_goals(auth_token):
@@ -78,24 +79,8 @@ def apply_backpressure(auth_token, max_days, target_goal):
             'comment': "Goal %s has %d days remaining" % (goal, days),
         }
         datapoints.append(datapoint)
-    if datapoints:
-        datapoints = json.dumps(datapoints)
-        api_url = (
-            "https://www.beeminder.com/api/v1/users/me/goals/%s/"
-            "datapoints/create_all.json"
-        ) % (
-            target_goal,
-        )
-
-        response = requests.post(api_url, data={
-            'datapoints': datapoints,
-            'auth_token': auth_token
-        })
-
-        result = json.loads(response.text)
-        if isinstance(result, dict) and result.get('errors'):
-            raise ValueError(
-                [json.loads(e)["comment"] for e in result["errors"]])
+    submit_datapoints(
+        datapoints=datapoints, target_goal=target_goal, auth_token=auth_token)
 
 
 def main():

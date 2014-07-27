@@ -27,6 +27,7 @@ SOFTWARE.
 import argparse
 import feedthebee
 import backpressure
+import todoist
 
 
 def main():
@@ -44,6 +45,11 @@ def main():
     parser.add_argument('--skip-backpressure', default=False,
                         action='store_true',
                         help="Don't update the backpressure goal")
+    parser.add_argument(
+        "--todoist-auth-token", type=str,
+        help=(
+            "The API key to use for todoist. "
+            "Will skip todoist goal if absent"))
 
     args = parser.parse_args()
     auth_token = args.auth_token
@@ -64,6 +70,13 @@ def main():
             auth_token=auth_token,
             target_goal="backpressureharder",
             max_days=14
+        )
+
+    if args.todoist_auth_token:
+        todoist.import_overdue_tasks(
+            beeminder_auth_token=args.auth_token,
+            todoist_auth_token=args.todoist_auth_token,
+            target_goal="todoist",
         )
 
 if __name__ == '__main__':
