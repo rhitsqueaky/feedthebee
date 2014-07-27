@@ -27,7 +27,6 @@ SOFTWARE.
 import argparse
 import feedthebee
 import backpressure
-import truncatedgoals
 
 
 def main():
@@ -60,6 +59,11 @@ def main():
             auth_token=auth_token,
             target_goal="backpressure",
             max_days=7
+        )
+        backpressure.apply_backpressure(
+            auth_token=auth_token,
+            target_goal="backpressureharder",
+            max_days=14
         )
 
 if __name__ == '__main__':
