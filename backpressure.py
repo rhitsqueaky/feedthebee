@@ -50,7 +50,7 @@ def all_goals(auth_token):
 
 def impending_goals(auth_token, max_days):
     for goal in all_goals(auth_token):
-        if goal["goal_type"] != "hustler":
+        if goal["goal_type"] not in ("hustler", "biker"):
             continue
         losedate = datetime.utcfromtimestamp(goal["losedate"])
         now = datetime.utcnow()
