@@ -79,7 +79,7 @@ def main():
             todoist_auth_token=args.todoist_auth_token,
             target_goal="todoist",
         )
-        todoist.import_karma(
+        todoistkarma.import_karma(
             beeminder_auth_token=args.auth_token,
             todoist_auth_token=args.todoist_auth_token,
             target_goal="todoistkarma",
