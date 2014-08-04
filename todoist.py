@@ -66,7 +66,7 @@ def import_overdue_tasks(
                 'value': 1,
                 'comment': task['content'],
                 'timestamp': now,
-                'request_id': hashlib.sha1(':'.join((
+                'requestid': hashlib.sha1(':'.join((
                     today,
                     beeminder_goal['id'],
                     str(task['id']),
